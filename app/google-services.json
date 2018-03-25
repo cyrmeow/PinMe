@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "179279457645",
+    "firebase_url": "https://pinme-d8fba.firebaseio.com",
+    "project_id": "pinme-d8fba",
+    "storage_bucket": "pinme-d8fba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179279457645:android:fef97103f0baa6bb",
+        "android_client_info": {
+          "package_name": "com.caoyi.pinme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "179279457645-jsqfmfidghhggaih92q23qulfekrjnea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLjkEWXm6kBFGAoVZi9TizbGs15JzDi3o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

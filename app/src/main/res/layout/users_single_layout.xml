@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/users_single_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/default_avatar" />
+
+    <TextView
+        android:id="@+id/users_single_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/users_single_image"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/users_single_image"
+        android:layout_toRightOf="@+id/users_single_image"
+        android:text="Name"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/users_single_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/users_single_image"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toEndOf="@+id/users_single_image"
+        android:layout_toRightOf="@+id/users_single_image"
+        android:text="Status"
+        android:textColor="@color/colorPrimary" />
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryLight"
+        android:layout_below="@+id/users_single_image"></View>
+
+</RelativeLayout>
