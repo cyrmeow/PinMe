@@ -3,6 +3,8 @@ package com.caoyi.pinme.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,10 +65,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (holder.getItemViewType() == 0) {
             MessageViewHolder vh0 = (MessageViewHolder) holder;
             vh0.mMessageText.setText(message);
+            Linkify.addLinks(vh0.mMessageText, Linkify.ALL);
 
         } else {
             MessageSelfViewHolder vh1 = (MessageSelfViewHolder) holder;
             vh1.mMessageText.setText(message);
+            Linkify.addLinks(vh1.mMessageText, Linkify.ALL);
         }
     }
 
@@ -80,10 +84,19 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public int getItemViewType(int position) {
         Messages msg = mMessagesList.get(position);
         if (msg.getFrom().equals(mCurrentUser.getUid())) {
-            return 1;
+            if (msg.getType().equals("text")) {
+                return 1;
+            } else if (msg.getType().equals("location")) {
+                return 3;
+            }
         } else {
-            return 0;
+            if (msg.getType().equals("text")) {
+                return 0;
+            } else if (msg.getType().equals("location")) {
+                return 2;
+            }
         }
+        return 0;
     }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder{
@@ -96,6 +109,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
             mMessageText = itemView.findViewById(R.id.message_text_layout);
             mProfileImage = itemView.findViewById(R.id.message_image_layout);
+//            Linkify.addLinks(mMessageText, Linkify.ALL);
         }
     }
 
@@ -109,6 +123,17 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
             mMessageText = itemView.findViewById(R.id.message_text_layout);
             mProfileImage = itemView.findViewById(R.id.message_image_layout);
+//            Linkify.addLinks(mMessageText, Linkify.ALL);
+        }
+    }
+
+    public static class MapSelfViewHolder extends RecyclerView.ViewHolder {
+
+        View mView;
+
+        public MapSelfViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
         }
     }
 }

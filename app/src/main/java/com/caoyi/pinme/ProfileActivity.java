@@ -37,7 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView mName, mStatus, mTotalFriends;
     private ImageView mImage;
-    private Button mSendRequestButton;
+    private Button mSendRequestButton, mDeclineRequestButton;
 
     ProgressDialog mProgress;
 
@@ -56,6 +56,19 @@ public class ProfileActivity extends AppCompatActivity {
         mUserReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         mFriendReqReference = FirebaseDatabase.getInstance().getReference().child("Friend_req");
         mFriendsReference = FirebaseDatabase.getInstance().getReference().child("Friends");
+
+        mName = findViewById(R.id.profile_name);
+        mStatus = findViewById(R.id.profile_status);
+        mImage = findViewById(R.id.profile_image);
+        mTotalFriends = findViewById(R.id.profile_total_friends);
+        mSendRequestButton = findViewById(R.id.profile_request_button);
+        mDeclineRequestButton = findViewById(R.id.profile_decline_button);
+        mDeclineRequestButton.setVisibility(View.INVISIBLE);
+
+        mProgress = new ProgressDialog(this);
+        mProgress.setTitle("Loading user profile...");
+        mProgress.setCanceledOnTouchOutside(false);
+        mProgress.show();
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -80,6 +93,7 @@ public class ProfileActivity extends AppCompatActivity {
                         mSendRequestButton.setText("Accept Friend Request");
                         mSendRequestButton.setTextColor(getResources().getColor(android.R.color.white));
                         mSendRequestButton.setBackgroundColor(getResources().getColor(R.color.colorAccentCold));
+                        mDeclineRequestButton.setVisibility(View.VISIBLE);
 
                     }
 
@@ -116,16 +130,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        mName = findViewById(R.id.profile_name);
-        mStatus = findViewById(R.id.profile_status);
-        mImage = findViewById(R.id.profile_image);
-        mTotalFriends = findViewById(R.id.profile_total_friends);
-        mSendRequestButton = findViewById(R.id.profile_request_button);
 
-        mProgress = new ProgressDialog(this);
-        mProgress.setTitle("Loading user profile...");
-        mProgress.setCanceledOnTouchOutside(false);
-        mProgress.show();
 
         mUserReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -206,6 +211,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     mSendRequestButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                                     Toast.makeText(ProfileActivity.this, "Friend Request Canceled", Toast.LENGTH_SHORT).show();
 
+
                                 }
                             });
 
@@ -244,6 +250,7 @@ public class ProfileActivity extends AppCompatActivity {
                                                     mSendRequestButton.setText("Unfriend");
                                                     mSendRequestButton.setTextColor(getResources().getColor(android.R.color.white));
                                                     mSendRequestButton.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+                                                    mDeclineRequestButton.setVisibility(View.INVISIBLE);
 
                                                 }
                                             });
@@ -289,6 +296,41 @@ public class ProfileActivity extends AppCompatActivity {
 
                 }
 
+            }
+        });
+
+        mDeclineRequestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mReqStatus.equals("request_received")) {
+
+                    mDeclineRequestButton.setEnabled(false);
+
+                    // Remove request
+                    mFriendReqReference.child(mCurrentUser.getUid()).child(uid).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                            mFriendReqReference.child(uid).child(mCurrentUser.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+
+                                    mReqStatus = "not_friends";
+                                    mSendRequestButton.setText("Send Friend Request");
+                                    mSendRequestButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                    mSendRequestButton.setTextColor(getResources().getColor(android.R.color.white));
+                                    mDeclineRequestButton.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(ProfileActivity.this, "Request Declined", Toast.LENGTH_LONG).show();
+
+
+                                }
+                            });
+
+                        }
+                    });
+
+                    mDeclineRequestButton.setEnabled(true);
+                }
             }
         });
 

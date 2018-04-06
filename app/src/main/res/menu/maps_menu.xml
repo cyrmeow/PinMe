@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/maps_locate"
+        android:title="Locate"
+        android:icon="@drawable/ic_location_searching_white_24dp"
+        app:showAsAction="always"></item>
+
+    <item android:id="@+id/maps_send"
+        android:title="Send"
+        android:icon="@drawable/ic_done_white_24dp"
+        app:showAsAction="always"></item>
+
+</menu>

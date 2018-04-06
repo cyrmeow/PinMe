@@ -65,7 +65,7 @@
         android:layout_below="@+id/profile_request_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@color/colorAccent"
+        android:background="@android:color/holo_red_dark"
         android:text="@string/decline_friend_request"
         android:textColor="@android:color/white" />
 </RelativeLayout>

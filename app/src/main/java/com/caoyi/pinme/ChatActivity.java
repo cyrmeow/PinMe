@@ -1,6 +1,9 @@
 package com.caoyi.pinme;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -134,7 +137,40 @@ public class ChatActivity extends AppCompatActivity {
 
         });
 
+        mMoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*CharSequence[] options = new CharSequence[]{"send image", "send location"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+                builder.setTitle("Select Options");
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                return;
+                            case 1:
+                                Intent mapsIntent = new Intent(ChatActivity.this, LocationSelectActivity.class);
+                                mapsIntent.putExtra("current_uid", mCurrentUser.getUid());
+                                mapsIntent.putExtra("with_uid", mWithUserId);
+                                startActivity(mapsIntent);
+                                return;
+                            default:
+                                return;
+                        }
+                    }
+                });
+                builder.show();*/
+
+                Intent mapsIntent = new Intent(ChatActivity.this, LocationSelectActivity.class);
+                mapsIntent.putExtra("current_uid", mCurrentUser.getUid());
+                mapsIntent.putExtra("with_uid", mWithUserId);
+                startActivity(mapsIntent);
+            }
+        });
+
         loadMessages();
+
     }
 
     private void loadMessages() {
@@ -205,7 +241,9 @@ public class ChatActivity extends AppCompatActivity {
             mMessageReference.updateChildren(msgUserMap, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                    Log.e("MESSAGE_LOG", databaseError.getMessage());
+                    if (databaseError != null) {
+                        Log.e("MESSAGE_LOG", databaseError.getMessage());
+                    }
                 }
             });
 

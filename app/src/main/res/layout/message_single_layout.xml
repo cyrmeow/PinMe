@@ -23,5 +23,6 @@
         android:background="@drawable/message_text_background"
         android:padding="15dp"
         android:text="TextView"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textColorLink="@color/colorAccent" />
 </RelativeLayout>

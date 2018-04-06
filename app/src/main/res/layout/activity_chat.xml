@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:background="@android:color/white"
             android:elevation="0dp"
-            app:srcCompat="@drawable/ic_add_black_24dp" />
+            app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
         <EditText
             android:id="@+id/chat_input_text"
