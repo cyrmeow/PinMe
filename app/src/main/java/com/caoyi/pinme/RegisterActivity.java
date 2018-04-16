@@ -95,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                             String uid = currentUser.getUid();
 
                             mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+                            mDatabase.keepSynced(true);
 
                             HashMap<String, String> map = new HashMap<>();
                             map.put("name", name);

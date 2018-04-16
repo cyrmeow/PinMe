@@ -85,9 +85,11 @@ public class ChatActivity extends AppCompatActivity {
 
 
         mUsersReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUsersReference.keepSynced(true);
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         mChatsReference = FirebaseDatabase.getInstance().getReference().child("Chats");
+        mChatsReference.keepSynced(true);
         // create entry in chat table if not exist
         mChatsReference.child(mCurrentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -126,6 +128,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
         mMessageReference = FirebaseDatabase.getInstance().getReference().child("Messages");
+        mMessageReference.keepSynced(true);
 
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override

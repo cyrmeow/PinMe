@@ -54,8 +54,11 @@ public class ProfileActivity extends AppCompatActivity {
         final String uid = getIntent().getStringExtra("uid");
 
         mUserReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        mUserReference.keepSynced(true);
         mFriendReqReference = FirebaseDatabase.getInstance().getReference().child("Friend_req");
+        mFriendReqReference.keepSynced(true);
         mFriendsReference = FirebaseDatabase.getInstance().getReference().child("Friends");
+        mFriendReqReference.keepSynced(true);
 
         mName = findViewById(R.id.profile_name);
         mStatus = findViewById(R.id.profile_status);

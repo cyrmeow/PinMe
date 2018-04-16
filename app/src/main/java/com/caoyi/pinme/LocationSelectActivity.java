@@ -63,6 +63,7 @@ public class LocationSelectActivity extends AppCompatActivity implements OnMapRe
         mapFragment.getMapAsync(this);
 
         mMessageReference = FirebaseDatabase.getInstance().getReference().child("Messages");
+        mMessageReference.keepSynced(true);
 
     }
 

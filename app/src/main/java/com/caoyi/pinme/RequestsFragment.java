@@ -63,7 +63,9 @@ public class RequestsFragment extends Fragment {
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         mRequestReference = FirebaseDatabase.getInstance().getReference().child("Friend_req").child(mCurrentUser.getUid());
+        mRequestReference.keepSynced(true);
         mUsersReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUsersReference.keepSynced(true);
 
         return mFragmentView;
     }

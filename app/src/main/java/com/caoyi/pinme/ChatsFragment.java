@@ -64,8 +64,11 @@ public class ChatsFragment extends Fragment {
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         mChatsReference = FirebaseDatabase.getInstance().getReference().child("Chats").child(mCurrentUser.getUid());
+        mChatsReference.keepSynced(true);
         mMessagesReference = FirebaseDatabase.getInstance().getReference().child("Messages");
+        mMessagesReference.keepSynced(true);
         mUsersReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUsersReference.keepSynced(true);
 
         return mFragmentView;
     }
