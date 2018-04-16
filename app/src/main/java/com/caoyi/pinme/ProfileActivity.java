@@ -295,6 +295,15 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     });
 
+                    DatabaseReference chatsReference = FirebaseDatabase.getInstance().getReference().child("Chats").child(mCurrentUser.getUid());
+                    chatsReference.keepSynced(true);
+                    chatsReference.child(uid).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                        }
+                    });
+
+
                     mSendRequestButton.setEnabled(true);
 
                 }

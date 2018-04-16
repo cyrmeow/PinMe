@@ -179,6 +179,7 @@ public class ChatActivity extends AppCompatActivity {
     private void loadMessages() {
 
         DatabaseReference conversationRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(mCurrentUser.getUid()).child(mWithUserId);
+        conversationRef.keepSynced(true);
         conversationRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
